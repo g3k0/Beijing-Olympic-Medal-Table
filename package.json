@@ -1,0 +1,11 @@
+{
+  "name": "olympics_medal_table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Christian Palazzo",
+  "license": "ISC"
+}

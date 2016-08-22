@@ -10,7 +10,7 @@ angular.module('appApp', [
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-function _router($stateProvider, $urlRouterProvider, $breadcrumbProvider, gmLibraryProvider) {
+function _router($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
 

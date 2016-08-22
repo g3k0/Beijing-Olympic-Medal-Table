@@ -1,0 +1,30 @@
+angular.module('appApp')
+	.factory('commonServices', _commonServices);
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+_commonServices.$inject = ['$http'];
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+/* @ngInject */
+function _commonServices ($http) {
+	'use strict';
+
+    return {
+
+		/*
+		 * Get the medals list
+		 */
+		find: function _find (callback) {
+			var url = 'https://gist.githubusercontent';
+
+			$http.get(url)
+				.then(function (data) {
+					//success
+					console.log(data);
+					return callback(null, data);
+				},
+				function () {
+					var err = true;
+					return callback(err);
+				});
+		}
+    };
+}

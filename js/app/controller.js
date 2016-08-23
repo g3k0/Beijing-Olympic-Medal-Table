@@ -43,12 +43,12 @@ function _mainCtrl ($scope/*, commonServices*/, $http) {
 				return newEl;
 			});
 
-			var grouped = [];
+			vm.grouped = [];
 
 			results.forEach(function (a) {
 			    if (!this[a.country]) {
 			        this[a.country] = { country: a.country };
-			        grouped.push(this[a.country]);
+			        vm.grouped.push(this[a.country]);
 			    }
 			    Object.keys(a).forEach(function (k) {
 			        if (k !== 'country') {
@@ -58,10 +58,27 @@ function _mainCtrl ($scope/*, commonServices*/, $http) {
 			    }, this[a.country]);
 			}, Object.create(null));
 
-			for (var i=0; i<grouped.length; ++i) {
-				grouped[i].total = grouped[i].gold + grouped[i].silver + grouped[i].bronze;
+			for (var i=0; i<vm.grouped.length; ++i) {
+				vm.grouped[i].total = vm.grouped[i].gold + vm.grouped[i].silver + vm.grouped[i].bronze;
 			}
 
+			//sorting medal table
+			function compare(a,b) {
+			  if (a.gold > b.gold)
+			    return -1;
+			  if (a.gold < b.gold)
+			    return 1;
+			  if (a.gold === b.gold) {
+			  	if (a.total > b.total)
+			  		return -1;
+			  	if (a.total < b.total)
+			  		return 1;
+			  	return 0;
+			  }
+			  return 0;
+			}
+
+			vm.grouped.sort(compare);
 			
 			return;
 		},
@@ -69,6 +86,14 @@ function _mainCtrl ($scope/*, commonServices*/, $http) {
 			//error
 			var err = true;
 			console.log('error on getting data', err);
+			// mock
+			vm.grouped = [
+				{country: 'Italy', gold:8, silver:9, bronze:7, total: 24},
+				{country: 'USA', gold:23, silver:15, bronze:10, total: 48},
+				{country: 'Japan', gold:12, silver:15, bronze:10, total: 37},
+				{country: 'France', gold:12, silver:9, bronze:13, total: 34}
+			];
+
 			return;
 		});
     }
